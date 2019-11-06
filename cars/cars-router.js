@@ -14,4 +14,15 @@ router.get('/', (req, res) => {
         })
 })
 
+router.post('/', (req, res) => {
+    Cars.insert(req.body, 'id')
+        .into('cars')
+        .then(ids => {
+            res.status(201).json(ids);
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Failed to insert car' })
+        })
+})
+
 module.exports = router;
